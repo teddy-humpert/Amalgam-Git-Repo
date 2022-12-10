@@ -56,7 +56,7 @@ public class AmalgamSandbox {
         }
 
         // CREATE AMALGAM
-        String testWord = "horse";
+        String testWord = "chapter";
         long testWordLength = testWord.length();
 
         List<Character> testWordArray = new ArrayList<>();
