@@ -56,7 +56,7 @@ public class AmalgamSandbox {
         }
 
         // CREATE AMALGAM
-        String testWord = "chapter";
+        String testWord = "purse";
         long testWordLength = testWord.length();
 
         List<Character> testWordArray = new ArrayList<>();
@@ -120,7 +120,7 @@ public class AmalgamSandbox {
 //        System.out.println(foundWords);
 
         for (String word : foundWords) {
-            outputString += word + "\n";
+            outputString += word.toUpperCase() + "\n";
         }
         System.out.println(outputString);
 
@@ -140,34 +140,34 @@ public class AmalgamSandbox {
     }
 
 
-    public static String FindWords(List<String> wordShuffles, List<String> dictionary, String testWord) {
-//         file reader
-//         test all Strings in list
-//         populate new list of all words in wordList.txt?
-//         substrings 0,3 to 0, testWord.length()
-//         need a moving TAKE
-        String outputString = "";
-        List<String> foundWords = new ArrayList<>();
-        for (String word : wordShuffles) {
-            for (int i = 3; i < testWord.length(); i++) {
-                int take = i;
-                //substring land -- moving take index in place
-                // now needs to apply to each line of wordShuffles against full list of dictionary
-//            for (String word : wordShuffles) {
-                String checkedWord = word.substring(0, take);
-                System.out.println(checkedWord);
-                if (dictionary.contains(checkedWord)) {
-                    foundWords.add(testWord);
-                }
-            }
-        }
-
-        for (int h = 0; h < foundWords.size(); h++) {
-            outputString += foundWords.get(h) + "\n";
-        }
-
-        return outputString;
-    }
+//    public static String FindWords(List<String> wordShuffles, List<String> dictionary, String testWord) {
+////         file reader
+////         test all Strings in list
+////         populate new list of all words in wordList.txt?
+////         substrings 0,3 to 0, testWord.length()
+////         need a moving TAKE
+//        String outputString = "";
+//        List<String> foundWords = new ArrayList<>();
+//        for (String word : wordShuffles) {
+//            for (int i = 3; i < testWord.length(); i++) {
+//                int take = i;
+//                //substring land -- moving take index in place
+//                // now needs to apply to each line of wordShuffles against full list of dictionary
+////            for (String word : wordShuffles) {
+//                String checkedWord = word.substring(0, take);
+////                System.out.println(checkedWord);
+//                if (dictionary.contains(checkedWord)) {
+//                    foundWords.add(testWord);
+//                }
+//            }
+//        }
+//
+//        for (int h = 0; h < foundWords.size(); h++) {
+//            outputString += foundWords.get(h) + "\n";
+//        }
+//
+//        return outputString.toUpperCase();
+//    }
 
     // worked out how to get the factorial...
     public static long Factorial(long bigNumber) {
@@ -178,18 +178,18 @@ public class AmalgamSandbox {
         return fact;
     }
 
-    public static void LogFoundWord(String foundWord) {
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String strDate = dateFormat.format(date);
-        String auditPath = "wordList.txt";
-        File logFile = new File(auditPath);
-        try (PrintWriter log = new PrintWriter(new FileOutputStream(logFile, true))) {
-            log.println(foundWord);
-        } catch (
-                FileNotFoundException fnfe) {
-            System.out.println("*** Unable to open log file: " + logFile.getAbsolutePath());
-        }
-    }
+//    public static void LogFoundWord(String foundWord) {
+//        Date date = Calendar.getInstance().getTime();
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+//        String strDate = dateFormat.format(date);
+//        String auditPath = "wordList.txt";
+//        File logFile = new File(auditPath);
+//        try (PrintWriter log = new PrintWriter(new FileOutputStream(logFile, true))) {
+//            log.println(foundWord);
+//        } catch (
+//                FileNotFoundException fnfe) {
+//            System.out.println("*** Unable to open log file: " + logFile.getAbsolutePath());
+//        }
+//    }
 
 }
