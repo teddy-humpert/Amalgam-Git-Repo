@@ -78,7 +78,7 @@ public class AmalgamSandbox {
                 wordShuffles.add(mashedWord);
                 // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
                 lineCount++;
-                System.out.println(lineCount + " " + mashedWord);
+//                System.out.println(lineCount + " " + mashedWord);
                 //wordbuilder works yay
             }
         }
