@@ -40,7 +40,7 @@ public class AmalgamSandbox {
     public static void main(String[] args) {
 
         //LOAD DATA
-        String filePath = "C:\\Users\\Student\\teddyCode\\Amalgam\\src\\main\\resources\\wordList.txt";
+        String filePath = "src/main/resources/wordList.txt";
         File bookFile = new File(filePath);
         boolean isFileFound = false;
 
