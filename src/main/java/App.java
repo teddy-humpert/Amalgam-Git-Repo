@@ -25,7 +25,7 @@ public class App {
 
     public static void main(String[] args) {
         App amalgam = new App();
-//        amalgam.loadData();
+        amalgam.loadData();
         amalgam.run();
     }
 
@@ -59,6 +59,7 @@ public class App {
                 long testWordLength = testWord.length();
 
                 System.out.println("SYSTEM PROCESSING 1");
+//                System.out.println(dictionary);
 
 
                 List<Character> testWordArray = new ArrayList<>();
@@ -82,7 +83,7 @@ public class App {
                         wordShuffles.add(mashedWord);
                         // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
                         lineCount++;
-                System.out.println(lineCount + " " + mashedWord);
+//                System.out.println(lineCount + " " + mashedWord);
                         //wordbuilder works yay
                     }
                 }
@@ -116,7 +117,7 @@ public class App {
                 System.out.println("SYSTEM PROCESSING 3");
                 for (String checked : checkedWords) {
 //            System.out.println(checked);
-                    if (dictionary.contains(checked)) {
+                    if (dictionary.contains(checked) && !foundWords.contains(checked)) {
                         foundWords.add(checked);
 //                LogFoundWord(word);
                     }
@@ -127,7 +128,9 @@ public class App {
 
                 for (String word : foundWords) {
                     outputString += word.toUpperCase() + "\n";
+                    System.out.println(word);
                 }
+//                System.out.println(foundWords);
                 System.out.println("SYSTEM PROCESSING 5");
                 System.out.println(outputString);
                 promptForReturn();
