@@ -58,7 +58,7 @@ public class App {
                 String testWord = promptForString("Enter your word: ");
                 long testWordLength = testWord.length();
 
-                System.out.println("SYSTEM PROCESSING 1");
+                System.out.println("PARSING WORD...");
 //                System.out.println(dictionary);
 
 
@@ -67,9 +67,10 @@ public class App {
                 for (int i = 0; i < testWord.length(); i++) {
                     testWordArray.add(testWord.charAt(i));
                 }
+                long factorial = Factorial(testWordLength);
 
-                System.out.println("SYSTEM PROCESSING 2");
-
+                System.out.println("BUILDING " + factorial + " UNIQUE ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
+                System.out.println("This part may take a while ...");
 
                 int lineCount = 0;
 
@@ -99,8 +100,9 @@ public class App {
                 String outputString = "";
                 List<String> checkedWords = new ArrayList<>();
                 List<String> foundWords = new ArrayList<>();
+                System.out.println("CREATING A BUNCH OF 3 - " + testWordLength + " CHARACTER LONG WORDS FROM THOSE...");
+
                 for (String word : wordShuffles) {
-//            System.out.println(lineCount);
                     // ok need to lose brackets, commas and spaces for each word....
                     for (int z = 3; z <= testWord.length(); z++) {
                         int take = z;
@@ -108,13 +110,14 @@ public class App {
                         // now needs to apply to each line of wordShuffles against full list of dictionary
 //            for (String word : wordShuffles) {
                         String checkedWord = word.substring(0, take);
-                        System.out.println(checkedWord);
+//                        System.out.println(checkedWord);
                         //checkedword is happening
                         // so maybe create a checkedword list and then loop that...
                         checkedWords.add(checkedWord);
                     }
                 }
-                System.out.println("SYSTEM PROCESSING 3");
+                System.out.println("CHECKING ALL THOSE WORDS AGAINST A DICTIONARY...");
+                System.out.println("This part may also take a while ...");
                 for (String checked : checkedWords) {
 //            System.out.println(checked);
                     if (dictionary.contains(checked) && !foundWords.contains(checked)) {
@@ -123,15 +126,16 @@ public class App {
                     }
                 }
 //        System.out.println(foundWords);
+                System.out.println("ASSEMBLING YOUR RESULTS");
                 Collections.sort(foundWords);
-                System.out.println("SYSTEM PROCESSING 4");
 
                 for (String word : foundWords) {
                     outputString += word.toUpperCase() + "\n";
-                    System.out.println(word);
+//                    System.out.println(word);
                 }
 //                System.out.println(foundWords);
-                System.out.println("SYSTEM PROCESSING 5");
+
+                System.out.println("************RESULTS************");
                 System.out.println(outputString);
                 promptForReturn();
             }
