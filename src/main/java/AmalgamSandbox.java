@@ -56,7 +56,7 @@ public class AmalgamSandbox {
         }
 
         // CREATE AMALGAM
-        String testWord = "purse";
+        String testWord = "prides";
         long testWordLength = testWord.length();
 
         List<Character> testWordArray = new ArrayList<>();
@@ -68,7 +68,9 @@ public class AmalgamSandbox {
 
         int lineCount = 0;
 
+        // i think i need a different loop here
         while (wordShuffles.size() < Factorial(testWordLength)) {
+            System.out.println(Factorial(testWordLength));
             Collections.shuffle(testWordArray);
             String mashedWord = WordBuilder(testWordArray);
 //                    testWordArray.toString();
@@ -78,7 +80,7 @@ public class AmalgamSandbox {
                 wordShuffles.add(mashedWord);
                 // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
                 lineCount++;
-//                System.out.println(lineCount + " " + mashedWord);
+                System.out.println(lineCount + " " + mashedWord);
                 //wordbuilder works yay
             }
         }
@@ -103,7 +105,7 @@ public class AmalgamSandbox {
                 // now needs to apply to each line of wordShuffles against full list of dictionary
 //            for (String word : wordShuffles) {
                 String checkedWord = word.substring(0, take);
-//                System.out.println(checkedWord);
+                System.out.println(checkedWord);
                 //checkedword is happening
                 // so maybe create a checkedword list and then loop that...
                 checkedWords.add(checkedWord);
@@ -118,6 +120,7 @@ public class AmalgamSandbox {
             }
         }
 //        System.out.println(foundWords);
+        Collections.sort(foundWords);
 
         for (String word : foundWords) {
             outputString += word.toUpperCase() + "\n";

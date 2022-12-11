@@ -47,16 +47,90 @@ public class App {
     }
 
 
-
-
-        public  void run() {
+    public void run() {
 //                                                                                                         System.out.println(dataset.get(0) + " preWhile");
         while (true) {
             printTitleCard();
             printMainMenu();
             int mainMenuSelection = promptForMenuSelection("Please choose an option: ");
             if (mainMenuSelection == 1) {
-                FindWord();
+
+                String testWord = promptForString("Enter your word: ");
+                long testWordLength = testWord.length();
+
+                System.out.println("SYSTEM PROCESSING 1");
+
+
+                List<Character> testWordArray = new ArrayList<>();
+
+                for (int i = 0; i < testWord.length(); i++) {
+                    testWordArray.add(testWord.charAt(i));
+                }
+
+                System.out.println("SYSTEM PROCESSING 2");
+
+
+                int lineCount = 0;
+
+                while (wordShuffles.size() < Factorial(testWordLength)) {
+                    Collections.shuffle(testWordArray);
+                    String mashedWord = WordBuilder(testWordArray);
+//                    testWordArray.toString();
+//            String mashedWord = shuffledWord.join("", shuffledWord);
+
+                    if (!wordShuffles.contains(mashedWord)) {
+                        wordShuffles.add(mashedWord);
+                        // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
+                        lineCount++;
+                System.out.println(lineCount + " " + mashedWord);
+                        //wordbuilder works yay
+                    }
+                }
+
+
+//        for (int z = 0; z < wordShuffles.size(); z++) {
+//            lineCount++;
+//            System.out.println(lineCount);
+//            System.out.println(wordShuffles.get(z));
+//        }
+//
+                // maybe i need to break this down further
+                String outputString = "";
+                List<String> checkedWords = new ArrayList<>();
+                List<String> foundWords = new ArrayList<>();
+                for (String word : wordShuffles) {
+//            System.out.println(lineCount);
+                    // ok need to lose brackets, commas and spaces for each word....
+                    for (int z = 3; z <= testWord.length(); z++) {
+                        int take = z;
+                        //substring land -- moving take index in place
+                        // now needs to apply to each line of wordShuffles against full list of dictionary
+//            for (String word : wordShuffles) {
+                        String checkedWord = word.substring(0, take);
+                        System.out.println(checkedWord);
+                        //checkedword is happening
+                        // so maybe create a checkedword list and then loop that...
+                        checkedWords.add(checkedWord);
+                    }
+                }
+                System.out.println("SYSTEM PROCESSING 3");
+                for (String checked : checkedWords) {
+//            System.out.println(checked);
+                    if (dictionary.contains(checked)) {
+                        foundWords.add(checked);
+//                LogFoundWord(word);
+                    }
+                }
+//        System.out.println(foundWords);
+                Collections.sort(foundWords);
+                System.out.println("SYSTEM PROCESSING 4");
+
+                for (String word : foundWords) {
+                    outputString += word.toUpperCase() + "\n";
+                }
+                System.out.println("SYSTEM PROCESSING 5");
+                System.out.println(outputString);
+                promptForReturn();
             }
 //            if (mainMenuSelection == 2) {
 ////                playTwoPlayer();
@@ -93,7 +167,7 @@ public class App {
         // first step is to generate all possible shuffles.
         // shuffle to 1 if !contains into a list.
 
-        String testWord = "purse";
+        String testWord = promptForString("Enter your word: ");
         long testWordLength = testWord.length();
 
         List<Character> testWordArray = new ArrayList<>();
@@ -129,7 +203,7 @@ public class App {
 //
         // maybe i need to break this down further
         String outputString = "";
-        List <String> checkedWords = new ArrayList<>();
+        List<String> checkedWords = new ArrayList<>();
         List<String> foundWords = new ArrayList<>();
         for (String word : wordShuffles) {
 //            System.out.println(lineCount);
@@ -155,13 +229,13 @@ public class App {
             }
         }
 //        System.out.println(foundWords);
+        Collections.sort(foundWords);
 
         for (String word : foundWords) {
             outputString += word.toUpperCase() + "\n";
         }
-        System.out.println(outputString);
+//        return outputString;
 
-        promptForReturn();
     }
 
     public static String WordBuilder(List<Character> testWordArray) {
@@ -241,7 +315,7 @@ public class App {
         return fact;
     }
 
-    private void logSuccessResults(int guessCount ) {
+    private void logSuccessResults(int guessCount) {
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String strDate = dateFormat.format(date);
@@ -255,7 +329,7 @@ public class App {
         }
     }
 
-    private void logFailResults(int guessCount ) {
+    private void logFailResults(int guessCount) {
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String strDate = dateFormat.format(date);
@@ -268,14 +342,14 @@ public class App {
         }
     }
 
-    private void displayPastResults(){
+    private void displayPastResults() {
         String filePath = "wordList.txt";
         File logFile = new File(filePath);
         try (Scanner fileInput = new Scanner(logFile)) {
             while (fileInput.hasNextLine()) {
                 System.out.println(fileInput.nextLine());
             }
-        }catch (FileNotFoundException fnfe) {
+        } catch (FileNotFoundException fnfe) {
             System.out.println("The file was not found: " + logFile.getAbsolutePath());
         }
     }
