@@ -18,6 +18,8 @@ import java.util.Scanner;
 public class App {
 
     private final Scanner keyboard = new Scanner(System.in);
+    private static List<String> dictionary = new ArrayList<>();
+    private static List<String> wordShuffles = new ArrayList<>();
 
     private List<String> dataset = new ArrayList<>();
 
@@ -27,24 +29,34 @@ public class App {
         amalgam.run();
     }
 
-//    private void loadData() {
-//        String[] tempArray = WordList.load();
-//        for (int i = 0; i < tempArray.length; i++) {
-//            dataset.add(tempArray[i]);
-//        }
-//    }
+    private void loadData() {
+        String filePath = "src/main/resources/wordList.txt";
+        File bookFile = new File(filePath);
+        boolean isFileFound = false;
+
+        try (Scanner fileInput = new Scanner(bookFile)) {
+            isFileFound = true;
+            while (fileInput.hasNextLine()) {
+                String dictionaryWord = fileInput.nextLine();
+                dictionary.add(dictionaryWord);
+//                System.out.println(dictionaryWord);
+            }
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("The file was not found: " + bookFile.getAbsolutePath());
+        }
+    }
 
 
-    private void run() {
 
+
+        public  void run() {
 //                                                                                                         System.out.println(dataset.get(0) + " preWhile");
-
         while (true) {
             printTitleCard();
             printMainMenu();
             int mainMenuSelection = promptForMenuSelection("Please choose an option: ");
             if (mainMenuSelection == 1) {
-//                playSinglePlayer(playWordSplit, playWord);
+                FindWord();
             }
 //            if (mainMenuSelection == 2) {
 ////                playTwoPlayer();
@@ -63,137 +75,105 @@ public class App {
 
     private void printTitleCard() {
         System.out.println("*****************");
-        System.out.println("WELCOME TO ELDROW");
+        System.out.println("WELCOME TO AMALGAM");
         System.out.println("*****************");
         System.out.println();
     }
 
     private void printMainMenu() {
-        System.out.println("1: Play One Player Game");
-        System.out.println("2: Play Two Player Game");
-        System.out.println("3: Display Past Results");
+        System.out.println("1: Input Your Word of Choice");
+//        System.out.println("2: Play Two Player Game");
+//        System.out.println("3: Display Past Results");
         System.out.println("0: Exit");
         System.out.println();
     }
 
-    private void generateWordList() {
+    private void FindWord() {
         // for now just using the testWordArray
         // first step is to generate all possible shuffles.
         // shuffle to 1 if !contains into a list.
 
-        String testWord = "chain";
+        String testWord = "purse";
         long testWordLength = testWord.length();
 
-        List <Character> testWordArray = new ArrayList<>();
+        List<Character> testWordArray = new ArrayList<>();
 
-        for (int i = 0; i <= testWord.length(); i++) {
+        for (int i = 0; i < testWord.length(); i++) {
             testWordArray.add(testWord.charAt(i));
         }
 
-        List<String> wordShuffles = new ArrayList<>();
 
-        while (wordShuffles.size() <= Factorial(testWordLength)) {
+        int lineCount = 0;
+
+        while (wordShuffles.size() < Factorial(testWordLength)) {
             Collections.shuffle(testWordArray);
-            String shuffledWord = testWordArray.toString();
-            if (!wordShuffles.contains(shuffledWord)) {
-                wordShuffles.add(shuffledWord);
+            String mashedWord = WordBuilder(testWordArray);
+//                    testWordArray.toString();
+//            String mashedWord = shuffledWord.join("", shuffledWord);
+
+            if (!wordShuffles.contains(mashedWord)) {
+                wordShuffles.add(mashedWord);
+                // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
+                lineCount++;
+//                System.out.println(lineCount + " " + mashedWord);
+                //wordbuilder works yay
             }
         }
-        System.out.println(wordShuffles);
+
+
+//        for (int z = 0; z < wordShuffles.size(); z++) {
+//            lineCount++;
+//            System.out.println(lineCount);
+//            System.out.println(wordShuffles.get(z));
+//        }
+//
+        // maybe i need to break this down further
+        String outputString = "";
+        List <String> checkedWords = new ArrayList<>();
+        List<String> foundWords = new ArrayList<>();
+        for (String word : wordShuffles) {
+//            System.out.println(lineCount);
+            // ok need to lose brackets, commas and spaces for each word....
+            for (int z = 3; z <= testWord.length(); z++) {
+                int take = z;
+                //substring land -- moving take index in place
+                // now needs to apply to each line of wordShuffles against full list of dictionary
+//            for (String word : wordShuffles) {
+                String checkedWord = word.substring(0, take);
+//                System.out.println(checkedWord);
+                //checkedword is happening
+                // so maybe create a checkedword list and then loop that...
+                checkedWords.add(checkedWord);
+            }
+        }
+        System.out.println("SYSTEM PROCESSING");
+        for (String checked : checkedWords) {
+//            System.out.println(checked);
+            if (dictionary.contains(checked)) {
+                foundWords.add(checked);
+//                LogFoundWord(word);
+            }
+        }
+//        System.out.println(foundWords);
+
+        for (String word : foundWords) {
+            outputString += word.toUpperCase() + "\n";
+        }
+        System.out.println(outputString);
 
         promptForReturn();
     }
 
-    private void playTwoPlayer() {
+    public static String WordBuilder(List<Character> testWordArray) {
+        String testWordString = testWordArray.toString();
+        String sb = "";
 
-    }
-
-    private String checkGuessVsPlayWord(String playerGuess, String playWord) {
-        String guessResultString = "";
-        char[] playerGuessArray = playerGuess.toCharArray();
-        char[] playWordArray = playWord.toCharArray();
-        int rightCount = 0;
-        int wrongCount = 0;
-        int nearCount = 0;
-        String nearString = "";
-
-        // so the issue here is that if there's a word with more than one of a single letter
-        // it will 'print' problematically
-        // feel like i need to map word first, and get values of each letter.
-        Map<Character, Integer> playWordMap = WordMap(playWord);
-        Map<Character, Integer> guessWordMap = WordMap(playerGuess);
-        // so now with the near stuff it's a matter of testing maps against each other.
-        // i think i need to build a map as i go
-        Map<Character, Integer> buildingMap = new HashMap<>();
-        for (int i = 0; i < playerGuessArray.length; i++) {
-            char guessLetter = playerGuessArray[i];
-            if (!buildingMap.containsKey(guessLetter)) {
-                buildingMap.put(guessLetter, 1);
-            } else {
-                buildingMap.put(guessLetter, buildingMap.get(guessLetter) + 1);
-            }
-
-            if (playerGuessArray[i] == playWordArray[i]) {
-                guessResultString += "|+" + playerGuessArray[i] + "+|";
-                rightCount++;
-            }
-            // so it's really here that i have an issue.
-            // nullpointerexception by way of mapping. fixed.
-            // STILL NOT WORKING
-            // ok so the playWordMap will in a word like apple be : a 1 p 2 l 1 e 3
-            // so for a guess against apple like plant it would say yes there's a p
-            // had the map building in the wrong spot
-            if (playerGuessArray[i] != playWordArray[i] &&
-                    (new String(playWordArray).indexOf(playerGuessArray[i]) > -1)) { // if guessLetter isn't in the right place, but it is in the word...
-
-                if (buildingMap.get(guessLetter) <= playWordMap.get(guessLetter)) {
-                    guessResultString += "!?" + playerGuessArray[i] + "?|";
-                    nearCount++;
-                } else {
-                    guessResultString += "|-" + playerGuessArray[i] + "-|";
-                    wrongCount++;
-                }
-            }
-            if (playerGuessArray[i] != playWordArray[i] &&
-                    (new String(playWordArray).indexOf(playerGuessArray[i]) < 0)) {
-                guessResultString += "|-" + playerGuessArray[i] + "-|";
-                wrongCount++;
+        for (int i = 0; i < testWordString.length(); i++) {
+            if (Character.isAlphabetic(testWordString.charAt(i))) {
+                sb += testWordString.charAt(i);
             }
         }
-        return guessResultString;
-    }
-
-    private String letterCountString(String playerGuess, String playWord) {
-        char[] playerGuessArray = playerGuess.toCharArray();
-        char[] playWordArray = playWord.toCharArray();
-        int rightCount = 0;
-        int wrongCount = 0;
-        int nearCount = 0;
-        for (int i = 0; i < playerGuessArray.length; i++) {
-            if (playerGuessArray[i] == playWordArray[i]) {
-                rightCount++;
-            }
-            if (playerGuessArray[i] != playWordArray[i] &&
-                    (new String(playWordArray).indexOf(playerGuessArray[i]) > -1)) {
-                nearCount++;
-                // ok but then do i need to make another map and compare the two?
-            }
-            if (playerGuessArray[i] != playWordArray[i] &&
-                    (new String(playWordArray).indexOf(playerGuessArray[i]) < 0)) {
-                wrongCount++;
-            }
-        }
-        String letterCountString = "Your last guess has: ";
-        if (rightCount > 0) {
-            letterCountString += "\n" + rightCount + " letters in the right place (+).";
-        }
-        if (nearCount > 0) {
-            letterCountString += "\n" + nearCount + " letters in the word but in the wrong place (?).";
-        }
-        if (wrongCount > 0) {
-            letterCountString += "\n" + wrongCount + " letters not in the word at all (-).";
-        }
-        return letterCountString;
+        return sb;
     }
 
     private void displayResults(int guessCount) {
@@ -253,12 +233,11 @@ public class App {
         run();
     }
 
-    public long Factorial(long bigNumber) {
+    public static long Factorial(long bigNumber) {
         long fact = 1;
         for (int i = 2; i <= bigNumber; i++) {
             fact = fact * i;
         }
-//        System.out.println(fact);
         return fact;
     }
 
