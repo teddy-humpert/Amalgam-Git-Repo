@@ -71,16 +71,19 @@ public class App {
                 }
                 long factorial = Factorial(testWordLength);
 
-                System.out.println("BUILDING " + factorial + " UNIQUE ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
+                System.out.println("BUILDING " + factorial + " ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
                 System.out.println("This part may take a while ...");
 
                 int lineCount = 0;
 
+                // need new condition for while loop
                 while (wordShuffles.size() < Factorial(testWordLength)) {
                     Collections.shuffle(testWordArray);
                     String mashedWord = WordBuilder(testWordArray);
 //                    testWordArray.toString();
 //            String mashedWord = shuffledWord.join("", shuffledWord);
+                    // THE ISSUE IS HERE BECAUSE WORDS WITH DUPLICATE LETTERS WITH PRODUCE IDENTICAL RANDOMS,
+                    // AND SO THEY'LL NEVER HIT THE FACTORIAL ... so i do need a different while loop
 
                     if (!wordShuffles.contains(mashedWord)) {
                         wordShuffles.add(mashedWord);
