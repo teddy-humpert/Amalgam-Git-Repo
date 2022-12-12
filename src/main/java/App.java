@@ -15,6 +15,8 @@ import java.util.Scanner;
 // check all possible combos against database
 // print list
 
+// OK THE BIGGEST PROBLEM IS WORDS WITH DUPLICATE LETTERS, BECAUSE THEY HAVE REDUNDANT RANDOMS
+
 public class App {
 
     private final Scanner keyboard = new Scanner(System.in);

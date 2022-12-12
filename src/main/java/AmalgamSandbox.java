@@ -56,7 +56,7 @@ public class AmalgamSandbox {
         }
 
         // CREATE AMALGAM
-        String testWord = "roof";
+        String testWord = "elliot";
         long testWordLength = testWord.length();
 
         List<Character> testWordArray = new ArrayList<>();
@@ -64,13 +64,14 @@ public class AmalgamSandbox {
         for (int i = 0; i < testWord.length(); i++) {
             testWordArray.add(testWord.charAt(i));
         }
+        System.out.println("SYSTEM PROCESSING 1");
 
 
         int lineCount = 0;
 
         // i think i need a different loop here
         while (wordShuffles.size() < Factorial(testWordLength)) {
-            System.out.println(Factorial(testWordLength));
+//            System.out.println(Factorial(testWordLength));
             Collections.shuffle(testWordArray);
             String mashedWord = WordBuilder(testWordArray);
 //                    testWordArray.toString();
@@ -80,11 +81,12 @@ public class AmalgamSandbox {
                 wordShuffles.add(mashedWord);
                 // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
                 lineCount++;
-                System.out.println(lineCount + " " + mashedWord);
+//                System.out.println(lineCount + " " + mashedWord);
                 //wordbuilder works yay
             }
         }
 
+        System.out.println("SYSTEM PROCESSING 2");
 
 //        for (int z = 0; z < wordShuffles.size(); z++) {
 //            lineCount++;
@@ -105,13 +107,13 @@ public class AmalgamSandbox {
                 // now needs to apply to each line of wordShuffles against full list of dictionary
 //            for (String word : wordShuffles) {
                 String checkedWord = word.substring(0, take);
-                System.out.println(checkedWord);
+//                System.out.println(checkedWord);
                 //checkedword is happening
                 // so maybe create a checkedword list and then loop that...
                 checkedWords.add(checkedWord);
             }
         }
-        System.out.println("SYSTEM PROCESSING");
+        System.out.println("SYSTEM PROCESSING 3");
         for (String checked : checkedWords) {
 //            System.out.println(checked);
             if (dictionary.contains(checked)) {
@@ -121,6 +123,7 @@ public class AmalgamSandbox {
         }
 //        System.out.println(foundWords);
         Collections.sort(foundWords);
+        System.out.println("SYSTEM PROCESSING 4");
 
         for (String word : foundWords) {
             outputString += word.toUpperCase() + "\n";
