@@ -76,6 +76,7 @@ public class App {
                 System.out.println("This part may take a while ...");
 
                 int lineCount = 0;
+                int foundCount = 0;
 
                 // need new condition for while loop
                 // linecount will work, but it risks missing words...
@@ -130,6 +131,7 @@ public class App {
 //            System.out.println(checked);
                     if (dictionary.contains(checked) && !foundWords.contains(checked)) {
                         foundWords.add(checked);
+                        foundCount++;
 //                LogFoundWord(word);
                     }
                 }
@@ -148,6 +150,7 @@ public class App {
                 long endTime   = System.nanoTime();
                 long totalTime = endTime - startTime;
                 System.out.println("Search took " + totalTime/1000000000 + " seconds.");
+                System.out.println("Found : " + foundCount + " word(s).");
                 promptForReturn();
             }
 //            if (mainMenuSelection == 2) {
