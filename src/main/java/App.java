@@ -58,6 +58,7 @@ public class App {
             if (mainMenuSelection == 1) {
 
                 String testWord = promptForString("Enter your word: ");
+                long startTime = System.nanoTime();
                 long testWordLength = testWord.length();
 
                 System.out.println("PARSING WORD...");
@@ -144,7 +145,9 @@ public class App {
 
                 System.out.println("************RESULTS************");
                 System.out.println(outputString);
-
+                long endTime   = System.nanoTime();
+                long totalTime = endTime - startTime;
+                System.out.println("Search took " + totalTime/1000000000 + " seconds.");
                 promptForReturn();
             }
 //            if (mainMenuSelection == 2) {
