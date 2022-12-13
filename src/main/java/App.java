@@ -150,7 +150,7 @@ public class App {
                 long endTime   = System.nanoTime();
                 long totalTime = endTime - startTime;
                 System.out.println("Search took " + totalTime/1000000000 + " seconds.");
-                System.out.println("Found : " + foundCount + " word(s).");
+                System.out.println("Found : " + foundCount + " total word(s).");
                 promptForReturn();
             }
 //            if (mainMenuSelection == 2) {
