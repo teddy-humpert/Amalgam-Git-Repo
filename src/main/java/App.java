@@ -78,7 +78,7 @@ public class App {
 
                 // need new condition for while loop
                 // linecount will work, but it risks missing words...
-                while (lineCount < 100000) {
+                while (lineCount < 50000) {
                     lineCount++;
                     Collections.shuffle(testWordArray);
                     String mashedWord = WordBuilder(testWordArray);
@@ -144,6 +144,7 @@ public class App {
 
                 System.out.println("************RESULTS************");
                 System.out.println(outputString);
+
                 promptForReturn();
             }
 //            if (mainMenuSelection == 2) {
