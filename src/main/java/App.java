@@ -71,13 +71,15 @@ public class App {
                 }
                 long factorial = Factorial(testWordLength);
 
-                System.out.println("BUILDING " + factorial + " ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
+                System.out.println("THERE ARE " + factorial + " POSSIBLE 'UNIQUE' ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
                 System.out.println("This part may take a while ...");
 
                 int lineCount = 0;
 
                 // need new condition for while loop
-                while (wordShuffles.size() < Factorial(testWordLength)) {
+                // linecount will work, but it risks missing words...
+                while (lineCount < 100000) {
+                    lineCount++;
                     Collections.shuffle(testWordArray);
                     String mashedWord = WordBuilder(testWordArray);
 //                    testWordArray.toString();
@@ -88,7 +90,7 @@ public class App {
                     if (!wordShuffles.contains(mashedWord)) {
                         wordShuffles.add(mashedWord);
                         // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
-                        lineCount++;
+
 //                System.out.println(lineCount + " " + mashedWord);
                         //wordbuilder works yay
                     }
