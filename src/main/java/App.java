@@ -72,15 +72,16 @@ public class App {
                 }
                 long factorial = Factorial(testWordLength);
                 Map<Character, Integer> testWordMap = WordMap(testWord);
-                long trueFactorial = TrueFactorial(testWordLength, testWordMap);
+                long divisor = FactorialDivisor(testWordLength, testWordMap);
+                long trueFactorial = factorial / divisor;
 
-                System.out.println("THERE ARE " + factorial + " POSSIBLE 'UNIQUE' ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
+                System.out.println("THERE ARE " + trueFactorial + " POSSIBLE UNIQUE ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
                 System.out.println("This part may take a while ...");
 
                 int lineCount = 0;
                 int foundCount = 0;
 
-                while (lineCount <= 100000) {
+                while (lineCount <= trueFactorial) {
                     lineCount++;
                     Collections.shuffle(testWordArray);
                     String mashedWord = WordBuilder(testWordArray);
@@ -278,7 +279,7 @@ public class App {
         return 0;
     }
 
-    public static long TrueFactorial(long bigNumber, Map<Character, Integer> testWordMap) {
+    public static long FactorialDivisor(long bigNumber, Map<Character, Integer> testWordMap) {
         // total ! over product of all ! ...
         // so if map is properly populated, i need to grab all the values and multiply their factorials and make that the dividend
         // testwordLength(FACTORIAL) / mapValues(Factorial)
