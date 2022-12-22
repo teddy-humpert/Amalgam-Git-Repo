@@ -59,8 +59,12 @@ public class AmalgamSandbox {
         }
 
         // CREATE AMALGAM
-        String testWord = "elliot";
+        String testWord = "elliott";
         long testWordLength = testWord.length();
+        long testWordFact = Factorial(testWordLength);
+        Map<Character,Integer> testWordMap = WordMap(testWord);
+        long trueFact = TrueFactorial(testWordLength, testWordMap);
+        System.out.println(trueFact);
 
         List<Character> testWordArray = new ArrayList<>();
 
@@ -179,12 +183,36 @@ public class AmalgamSandbox {
 //    }
 
     // worked out how to get the factorial...
+    public static long TrueFactorial(long bigNumber, Map<Character, Integer> testWordMap) {
+        // total ! over product of all ! ...
+
+        return 0;
+    }
+
     public static long Factorial(long bigNumber) {
         long fact = 1;
         for (int i = 2; i <= bigNumber; i++) {
             fact = fact * i;
         }
         return fact;
+    }
+
+    public static Map<Character, Integer> WordMap(String word) {
+        //idea here is to generate a map that can be used to test existence of letters in guess.
+        List<Character> wordSplit = new ArrayList<>();
+        for (int i = 0; i < word.length(); i++) {
+            wordSplit.add(word.charAt(i));
+        }
+        Map<Character, Integer> output = new HashMap<>();
+
+        for (Character letter : wordSplit) {
+            if (!output.containsKey(letter)) {
+                output.put(letter, 1);
+            } else {
+                output.put(letter, output.get(letter) + 1);
+            }
+        }
+        return output;
     }
 
 //    public static void LogFoundWord(String foundWord) {

@@ -270,6 +270,12 @@ public class App {
         run();
     }
 
+    public static long trueFactorial(long bigNumber, Map<Character, Integer> testWordMap) {
+        // total ! over product of all ! ...
+
+        return 0;
+    }
+
     public static long Factorial(long bigNumber) {
         long fact = 1;
         for (int i = 2; i <= bigNumber; i++) {
