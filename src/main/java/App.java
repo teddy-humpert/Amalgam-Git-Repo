@@ -284,12 +284,6 @@ public class App {
         run();
     }
 
-    public static long trueFactorial(long bigNumber, Map<Character, Integer> testWordMap) {
-        // total ! over product of all ! ...
-
-        return 0;
-    }
-
     public static long FactorialDivisor(long bigNumber, Map<Character, Integer> testWordMap) {
         // total ! over product of all ! ...
         // so if map is properly populated, i need to grab all the values and multiply their factorials and make that the dividend
