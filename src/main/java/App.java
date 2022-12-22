@@ -74,13 +74,13 @@ public class App {
                 Map<Character, Integer> testWordMap = WordMap(testWord);
                 long trueFactorial = TrueFactorial(testWordLength, testWordMap);
 
-                System.out.println("THERE ARE " + trueFactorial + " POSSIBLE 'UNIQUE' ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
+                System.out.println("THERE ARE " + factorial + " POSSIBLE 'UNIQUE' ARRANGEMENTS OF LETTERS IN " + testWord.toUpperCase() + " ...");
                 System.out.println("This part may take a while ...");
 
                 int lineCount = 0;
                 int foundCount = 0;
 
-                while (lineCount <= trueFactorial) {
+                while (lineCount <= 100000) {
                     lineCount++;
                     Collections.shuffle(testWordArray);
                     String mashedWord = WordBuilder(testWordArray);
