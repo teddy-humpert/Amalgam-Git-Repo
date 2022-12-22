@@ -89,51 +89,33 @@ public class App {
                 }
 
 
-//        for (int z = 0; z < wordShuffles.size(); z++) {
-//            lineCount++;
-//            System.out.println(lineCount);
-//            System.out.println(wordShuffles.get(z));
-//        }
-//
-                // maybe i need to break this down further
                 String outputString = "";
                 List<String> checkedWords = new ArrayList<>();
                 List<String> foundWords = new ArrayList<>();
                 System.out.println("CREATING A BUNCH OF 3 - " + testWordLength + " CHARACTER LONG WORDS FROM THOSE...");
 
                 for (String word : wordShuffles) {
-                    // ok need to lose brackets, commas and spaces for each word....
                     for (int z = 3; z <= testWord.length(); z++) {
                         int take = z;
-                        //substring land -- moving take index in place
-                        // now needs to apply to each line of wordShuffles against full list of dictionary
-//            for (String word : wordShuffles) {
                         String checkedWord = word.substring(0, take);
-//                        System.out.println(checkedWord);
-                        //checkedword is happening
-                        // so maybe create a checkedword list and then loop that...
+
                         checkedWords.add(checkedWord);
                     }
                 }
                 System.out.println("CHECKING ALL THOSE WORDS AGAINST A DICTIONARY...");
                 System.out.println("This part may also take a while ...");
                 for (String checked : checkedWords) {
-//            System.out.println(checked);
                     if (dictionary.contains(checked) && !foundWords.contains(checked)) {
                         foundWords.add(checked);
                         foundCount++;
-//                LogFoundWord(word);
                     }
                 }
-//        System.out.println(foundWords);
                 System.out.println("ASSEMBLING YOUR RESULTS");
                 Collections.sort(foundWords);
 
                 for (String word : foundWords) {
                     outputString += word.toUpperCase() + "\n";
-//                    System.out.println(word);
                 }
-//                System.out.println(foundWords);
 
                 System.out.println("************RESULTS************");
                 System.out.println(outputString);
