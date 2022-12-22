@@ -8,7 +8,8 @@ import java.util.*;
 import java.util.Date;
 import java.util.Scanner;
 
-// CAUTION - if you're word is more than 8 characters, the process will take A WHILE
+// CAUTION - depending on the size of your word, and the number of repeated characters
+// this process could take a few minutes
 
 // input word
 // generate array of word
