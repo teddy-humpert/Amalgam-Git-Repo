@@ -59,7 +59,7 @@ public class AmalgamSandbox {
         }
 
         // CREATE AMALGAM
-        String testWord = "elliott";
+        String testWord = "aaabbbcccddd";
         long testWordLength = testWord.length();
         long testWordFact = Factorial(testWordLength);
         Map<Character,Integer> testWordMap = WordMap(testWord);
@@ -185,8 +185,13 @@ public class AmalgamSandbox {
     // worked out how to get the factorial...
     public static long TrueFactorial(long bigNumber, Map<Character, Integer> testWordMap) {
         // total ! over product of all ! ...
-
-        return 0;
+        // so if map is properly populated, i need to grab all the values and multiply their factorials and make that the dividend
+        // testwordLength(FACTORIAL) / mapValues(Factorial)
+        int dividend = 1;
+        for (Map.Entry<Character,Integer> character : testWordMap.entrySet()) {
+            dividend *= Factorial(character.getValue());
+        }
+        return dividend;
     }
 
     public static long Factorial(long bigNumber) {
