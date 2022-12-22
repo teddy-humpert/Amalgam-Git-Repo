@@ -16,6 +16,8 @@ import java.util.Scanner;
 // print list
 
 // need to fix factorial calculation to account for duplicate letters in a word.
+// which is to say total character count factorial DIVIDED by product of repeated letter factorials.
+// AS IN pepper |||| 6! / 3!*2!
 
 public class App {
 
@@ -125,13 +127,6 @@ public class App {
                 System.out.println("Found : " + foundCount + " total word(s).");
                 promptForReturn();
             }
-//            if (mainMenuSelection == 2) {
-////                playTwoPlayer();
-//                break;
-//            }
-//            if (mainMenuSelection == 3) {
-//                displayPastResults();
-//            }
             if (mainMenuSelection == 0) {
                 break;
             }
@@ -149,8 +144,6 @@ public class App {
 
     private void printMainMenu() {
         System.out.println("1: Input Your Word of Choice");
-//        System.out.println("2: Play Two Player Game");
-//        System.out.println("3: Display Past Results");
         System.out.println("0: Exit");
         System.out.println();
     }
@@ -175,60 +168,37 @@ public class App {
         while (wordShuffles.size() < Factorial(testWordLength)) {
             Collections.shuffle(testWordArray);
             String mashedWord = WordBuilder(testWordArray);
-//                    testWordArray.toString();
-//            String mashedWord = shuffledWord.join("", shuffledWord);
 
             if (!wordShuffles.contains(mashedWord)) {
                 wordShuffles.add(mashedWord);
-                // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
                 lineCount++;
-//                System.out.println(lineCount + " " + mashedWord);
-                //wordbuilder works yay
             }
         }
 
-
-//        for (int z = 0; z < wordShuffles.size(); z++) {
-//            lineCount++;
-//            System.out.println(lineCount);
-//            System.out.println(wordShuffles.get(z));
-//        }
-//
-        // maybe i need to break this down further
         String outputString = "";
         List<String> checkedWords = new ArrayList<>();
         List<String> foundWords = new ArrayList<>();
         for (String word : wordShuffles) {
-//            System.out.println(lineCount);
-            // ok need to lose brackets, commas and spaces for each word....
+
             for (int z = 3; z <= testWord.length(); z++) {
                 int take = z;
-                //substring land -- moving take index in place
-                // now needs to apply to each line of wordShuffles against full list of dictionary
-//            for (String word : wordShuffles) {
+
                 String checkedWord = word.substring(0, take);
-//                System.out.println(checkedWord);
-                //checkedword is happening
-                // so maybe create a checkedword list and then loop that...
+
                 checkedWords.add(checkedWord);
             }
         }
         System.out.println("SYSTEM PROCESSING");
         for (String checked : checkedWords) {
-//            System.out.println(checked);
             if (dictionary.contains(checked)) {
                 foundWords.add(checked);
-//                LogFoundWord(word);
             }
         }
-//        System.out.println(foundWords);
         Collections.sort(foundWords);
 
         for (String word : foundWords) {
             outputString += word.toUpperCase() + "\n";
         }
-//        return outputString;
-
     }
 
     public static String WordBuilder(List<Character> testWordArray) {
