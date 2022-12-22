@@ -15,7 +15,7 @@ import java.util.Scanner;
 // check all possible combos against database
 // print list
 
-// OK THE BIGGEST PROBLEM IS WORDS WITH DUPLICATE LETTERS, BECAUSE THEY HAVE REDUNDANT RANDOMS
+// need to fix factorial calculation to account for duplicate letters in a word.
 
 public class App {
 
@@ -50,7 +50,6 @@ public class App {
 
 
     public void run() {
-//                                                                                                         System.out.println(dataset.get(0) + " preWhile");
         while (true) {
             printTitleCard();
             printMainMenu();
@@ -62,7 +61,6 @@ public class App {
                 long testWordLength = testWord.length();
 
                 System.out.println("PARSING WORD...");
-//                System.out.println(dictionary);
 
 
                 List<Character> testWordArray = new ArrayList<>();
@@ -78,23 +76,15 @@ public class App {
                 int lineCount = 0;
                 int foundCount = 0;
 
-                // need new condition for while loop
-                // linecount will work, but it risks missing words...
                 while (lineCount < 50000) {
                     lineCount++;
                     Collections.shuffle(testWordArray);
                     String mashedWord = WordBuilder(testWordArray);
-//                    testWordArray.toString();
-//            String mashedWord = shuffledWord.join("", shuffledWord);
-                    // THE ISSUE IS HERE BECAUSE WORDS WITH DUPLICATE LETTERS WITH PRODUCE IDENTICAL RANDOMS,
-                    // AND SO THEY'LL NEVER HIT THE FACTORIAL ... so i do need a different while loop
+
 
                     if (!wordShuffles.contains(mashedWord)) {
                         wordShuffles.add(mashedWord);
-                        // TESTING TO SEE THAT IT'S POPULATING CORRECTLY
 
-//                System.out.println(lineCount + " " + mashedWord);
-                        //wordbuilder works yay
                     }
                 }
 
