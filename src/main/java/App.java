@@ -17,9 +17,7 @@ import java.util.Scanner;
 // check all possible combos against database
 // print list
 
-// need to fix factorial calculation to account for duplicate letters in a word.
-// which is to say total character count factorial DIVIDED by product of repeated letter factorials.
-// AS IN pepper |||| 6! / 3!*2!
+// current unresolved issue with promptForReturn
 
 public class App {
 
@@ -83,18 +81,25 @@ public class App {
                 int lineCount = 0;
                 int foundCount = 0;
 
-                while (lineCount <= trueFactorial) {
-                    lineCount++;
-                    Collections.shuffle(testWordArray);
-                    String mashedWord = WordBuilder(testWordArray);
-
-
-                    if (!wordShuffles.contains(mashedWord)) {
-                        wordShuffles.add(mashedWord);
-
+                if (trueFactorial < 100000) {
+                    while (lineCount <= trueFactorial) {
+                        lineCount++;
+                        Collections.shuffle(testWordArray);
+                        String mashedWord = WordBuilder(testWordArray);
+                        if (!wordShuffles.contains(mashedWord)) {
+                            wordShuffles.add(mashedWord);
+                        }
+                    }
+                } else {
+                    while (lineCount <= 100000) {
+                        lineCount++;
+                        Collections.shuffle(testWordArray);
+                        String mashedWord = WordBuilder(testWordArray);
+                        if (!wordShuffles.contains(mashedWord)) {
+                            wordShuffles.add(mashedWord);
+                        }
                     }
                 }
-
 
                 String outputString = "";
                 List<String> checkedWords = new ArrayList<>();
@@ -109,6 +114,7 @@ public class App {
                         checkedWords.add(checkedWord);
                     }
                 }
+
                 System.out.println("CHECKING ALL THOSE WORDS AGAINST A DICTIONARY...");
                 System.out.println("This part may also take a while ...");
                 for (String checked : checkedWords) {
@@ -117,6 +123,7 @@ public class App {
                         foundCount++;
                     }
                 }
+
                 System.out.println("ASSEMBLING YOUR RESULTS");
                 Collections.sort(foundWords);
 
@@ -126,11 +133,12 @@ public class App {
 
                 System.out.println("************RESULTS************");
                 System.out.println(outputString);
-                long endTime   = System.nanoTime();
+                long endTime = System.nanoTime();
                 long totalTime = endTime - startTime;
-                System.out.println("Search took " + totalTime/1000000000 + " seconds.");
+                System.out.println("Search took " + totalTime / 1000000000 + " seconds.");
                 System.out.println("Found : " + foundCount + " total word(s).");
-                promptForReturn();
+//                promptForReturn();
+                break;
             }
             if (mainMenuSelection == 0) {
                 break;
@@ -286,7 +294,7 @@ public class App {
         // so if map is properly populated, i need to grab all the values and multiply their factorials and make that the dividend
         // testwordLength(FACTORIAL) / mapValues(Factorial)
         int dividend = 1;
-        for (Map.Entry<Character,Integer> character : testWordMap.entrySet()) {
+        for (Map.Entry<Character, Integer> character : testWordMap.entrySet()) {
             dividend *= Factorial(character.getValue());
         }
         return dividend;
