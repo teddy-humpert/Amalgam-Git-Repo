@@ -8,6 +8,8 @@ import java.util.*;
 import java.util.Date;
 import java.util.Scanner;
 
+// CAUTION - if you're word is more than 8 characters, the process will take A WHILE
+
 // input word
 // generate array of word
 // generate list of all possible shuffles of array
