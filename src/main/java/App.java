@@ -59,7 +59,7 @@ public class App {
             int mainMenuSelection = promptForMenuSelection("Please choose an option: ");
             if (mainMenuSelection == 1) {
 
-                String testWord = promptForString("Enter your word: ");
+                String testWord = promptForString("Enter your word (single words only, please - no spaces): ");
                 long startTime = System.nanoTime();
                 long testWordLength = testWord.length();
 
